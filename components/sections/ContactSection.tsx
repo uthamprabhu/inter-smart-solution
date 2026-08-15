@@ -1,0 +1,151 @@
+'use client';
+
+import { useState } from 'react';
+import { CheckCircle2 } from 'lucide-react';
+import Button from '@/components/ui/Button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/Alert';
+
+export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    email: '',
+    name: '',
+    message: '',
+  });
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Save to localStorage
+    const submissionData = {
+      ...formData,
+      submittedAt: new Date().toISOString(),
+    };
+    localStorage.setItem('contactFormSubmission', JSON.stringify(submissionData));
+    
+    // Show success alert
+    setShowAlert(true);
+    
+    // Reset form
+    setFormData({
+      email: '',
+      name: '',
+      message: '',
+    });
+    
+    // Hide alert after 5 seconds
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Reusable input classes - DRY principle
+  const inputBaseClasses = "w-full px-6 pt-6 pb-2 bg-white/90 border border-form-border rounded-lg text-base text-brand-navy focus:outline-none focus:border-brand-navy transition-all duration-300 peer";
+  const labelBaseClasses = "absolute left-6 top-4 text-base text-brand-navy transition-all duration-300 pointer-events-none peer-focus:top-2 peer-focus:text-xs peer-focus:text-brand-navy";
+  const labelFilledClasses = "top-2 text-xs";
+
+  return (
+    <section id="contact" className="bg-bg-contact py-16 lg:py-24">
+      <div className="container-responsive">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+          {/* Left Column - Text Content */}
+          <div className="space-y-6">
+            <h2 className="text-4xl lg:text-[48px] font-semibold leading-15 text-brand-navy max-w-xl">
+              Let's talk about how digital initiatives can transform your business
+            </h2>
+            <p className="text-base md:text-lg font-normal leading-8 text-brand-navy max-w-lg">
+              We'll happily assist in exploring what will work best for you. Like, really best.
+            </p>
+          </div>
+
+          {/* Right Column - Contact Form */}
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-medium text-brand-navy-dark leading-15 mb-4">
+              Schedule Meeting
+            </h3>
+            
+            {/* Success Alert */}
+            {showAlert && (
+              <Alert variant="success" className="mb-6 animate-in fade-in slide-in-from-top-2 duration-300">
+                <CheckCircle2 className="h-4 w-4" />
+                <AlertTitle>Success!</AlertTitle>
+                <AlertDescription>
+                  Your message has been submitted successfully. We'll get back to you soon!
+                </AlertDescription>
+              </Alert>
+            )}
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email Input */}
+              <div className="relative">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className={inputBaseClasses}
+                />
+                <label 
+                  className={`${labelBaseClasses} ${formData.email ? labelFilledClasses : ''}`}
+                >
+                  Email
+                </label>
+              </div>
+
+              {/* Name Input */}
+              <div className="relative">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className={inputBaseClasses}
+                />
+                <label 
+                  className={`${labelBaseClasses} ${formData.name ? labelFilledClasses : ''}`}
+                >
+                  Name
+                </label>
+              </div>
+
+              {/* Message Textarea */}
+              <div className="relative">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className={`${inputBaseClasses} resize-none`}
+                />
+                <label 
+                  className={`${labelBaseClasses} ${formData.message ? labelFilledClasses : ''}`}
+                >
+                  Message
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <Button type="submit" variant="large">
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

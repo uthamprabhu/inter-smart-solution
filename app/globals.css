@@ -1,24 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand-navy: #182434;
+  --color-brand-navy-dark: #131728;
+  --color-surface-light: #f1f1f1;
+  --color-text-muted-light: #f6f6f6;
+  --color-bg-contact: #c9d6d6;
+  --color-accent-line: #0393B0;
+  --color-form-border: #2D4362;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #182434;
+  font-family: var(--font-poppins), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Container utility - used consistently across multiple components */
+@utility container-responsive {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Section header utilities - used via SectionHeader component */
+@utility section-title {
+  @apply text-3xl lg:text-[35px] font-bold leading-14 mb-4;
+}
+
+@utility section-description {
+  @apply text-base font-normal max-w-3xl mx-auto leading-7 mb-8;
+}
+
+@utility section-accent-line {
+  @apply w-28 h-1 bg-accent-line mx-auto;
 }
