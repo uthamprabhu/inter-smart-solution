@@ -91,7 +91,7 @@ inter-smart/
 
 ### Prerequisites
 
-- **Node.js** 18.18 or later
+- **Node.js** 20+
 - **npm**, **yarn**, or **pnpm**
 
 ### Installation
