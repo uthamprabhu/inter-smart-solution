@@ -2,7 +2,7 @@
 
 > A modern, responsive AI development company website built with Next.js 16 and Tailwind CSS v4.
 
-**Live Demo:** [https://inter-smart-solution.vercel.app](https://inter-smart-solution.vercel.app) _(placeholder)_
+**Live Demo:** [https://inter-smart-solution.vercel.app](https://inter-smart-solution.vercel.app)
 
 Built as a take-home assignment showcasing modern web development practices, component architecture, and production-ready code quality.
 
