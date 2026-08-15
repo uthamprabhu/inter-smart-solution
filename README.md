@@ -14,10 +14,13 @@ Built as a take-home assignment showcasing modern web development practices, com
 - **[React 19](https://react.dev/)** - Latest React with modern hooks
 - **[TypeScript 5](https://www.typescriptlang.org/)** - Full type safety
 - **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first styling with custom theme tokens
+- **[shadcn/ui](https://ui.shadcn.com/)** - Accessible component architecture (Alert component)
 - **[Poppins](https://fonts.google.com/specimen/Poppins)** - Google Font via next/font optimization
-- **[Lucide React](https://lucide.dev/)** - Icon library
-- **[Class Variance Authority](https://cva.style/)** - Component variant management
-- **[clsx](https://github.com/lukeed/clsx) + [tailwind-merge](https://github.com/dcastil/tailwind-merge)** - Intelligent className merging
+- **[Lucide React](https://lucide.dev/)** - Icon library (CheckCircle2)
+- **[Class Variance Authority](https://cva.style/)** - Component variant management (used by Alert)
+- **[clsx](https://github.com/lukeed/clsx) + [tailwind-merge](https://github.com/dcastil/tailwind-merge)** - Intelligent className merging (cn utility)
+- **[PostCSS](https://postcss.org/)** - CSS processing with @tailwindcss/postcss plugin
+- **[ESLint](https://eslint.org/)** - Code linting with Next.js config
 - **[Vercel](https://vercel.com/)** - Deployment platform
 
 ---
@@ -67,7 +70,7 @@ inter-smart/
 │   └── ui/
 │       ├── Button.tsx      # Reusable button with variants (primary, large)
 │       ├── SectionHeader.tsx        # Reusable section title + description
-│       └── Alert.tsx       # Success/error alerts with CVA variants
+│       └── Alert.tsx       # Success/error alerts (shadcn/ui based)
 │
 ├── lib/
 │   ├── data/
@@ -84,6 +87,8 @@ inter-smart/
 │
 └── package.json            # Dependencies and scripts
 ```
+
+**Note:** The project uses shadcn/ui architecture for the Alert component, but custom-built all other UI components (Button, SectionHeader) to match the specific design requirements.
 
 ---
 
