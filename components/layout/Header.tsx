@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,20 +14,28 @@ const NAV_LINKS = [
 ];
 
 export default function Header() {
+  // Always start with false to match SSR
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const hasScrolledRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
+      // Mark that user has scrolled (for showing navbar after refresh)
+      if (!hasScrolledRef.current) {
+        hasScrolledRef.current = true;
+        setIsVisible(true);
+      }
+      
       // Determine if scrolled past threshold
       setIsScrolled(currentScrollY > 50);
       
       // Determine visibility based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollYRef.current && currentScrollY > 100) {
         // Scrolling down - hide navbar
         setIsVisible(false);
       } else {
@@ -35,12 +43,28 @@ export default function Header() {
         setIsVisible(true);
       }
       
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Check initial scroll position after paint
+    const initialScrollY = window.scrollY;
+    lastScrollYRef.current = initialScrollY;
+    
+    if (initialScrollY > 50) {
+      // User refreshed while scrolled - hide navbar initially
+      // Use RAF to avoid ESLint warning about setState in effect
+      requestAnimationFrame(() => {
+        setIsScrolled(true);
+        setIsVisible(false);
+      });
+    } else {
+      // At top - show navbar normally
+      hasScrolledRef.current = true;
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -84,9 +108,10 @@ export default function Header() {
               alt="Inter Smart"
               width={180}
               height={40}
-              className={`h-8 lg:h-10 w-auto transition-all duration-300 ${
-                isScrolled ? 'brightness-0' : 'brightness-0 invert'
+              className={`transition-all duration-300 ${
+                isScrolled ? 'h-8 lg:h-10 brightness-0' : 'h-8 lg:h-10 brightness-0 invert'
               }`}
+              style={{ width: 'auto', height: 'auto' }}
               priority
             />
           </Link>

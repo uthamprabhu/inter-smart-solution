@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { heroSlides } from '@/lib/data/hero-slides';
 
 const AUTO_PLAY_INTERVAL = 5000; // 5 seconds
@@ -52,7 +51,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <Image
           src={currentSlide.backgroundImage}
-          alt="AI Development Visualization"
+          alt=""
           fill
           className="object-cover object-right sm:object-[75%] lg:object-right"
           priority

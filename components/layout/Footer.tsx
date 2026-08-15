@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { footerSections, socialLinks, footerLegalLinks } from '@/lib/data/footer-data';
 
 export default function Footer() {
@@ -41,9 +42,11 @@ export default function Footer() {
                   className="transition-opacity duration-200 hover:opacity-70"
                   aria-label={social.name}
                 >
-                  <img
+                  <Image
                     src={social.icon}
-                    alt={social.name}
+                    alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10"
                   />
                 </Link>

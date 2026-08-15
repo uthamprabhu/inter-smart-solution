@@ -49,9 +49,7 @@ export default function ContactSection() {
   };
 
   // Reusable input classes - DRY principle
-  const inputBaseClasses = "w-full px-6 pt-6 pb-2 bg-white/90 border border-form-border rounded-lg text-base text-brand-navy focus:outline-none focus:border-brand-navy transition-all duration-300 peer";
-  const labelBaseClasses = "absolute left-6 top-4 text-base text-brand-navy transition-all duration-300 pointer-events-none peer-focus:top-2 peer-focus:text-xs peer-focus:text-brand-navy";
-  const labelFilledClasses = "top-2 text-xs";
+  const inputClasses = "w-full px-4 md:px-6 py-4 sm:py-5 lg:py-5.5 bg-white border border-form-border rounded-lg text-base sm:text-lg text-brand-navy placeholder:text-brand-navy placeholder:text-base sm:placeholder:text-lg placeholder:leading-8 placeholder:font-normal focus:outline-none focus:border-brand-navy transition-colors duration-300";
 
   return (
     <section id="contact" className="bg-bg-contact py-16 lg:py-24">
@@ -60,10 +58,10 @@ export default function ContactSection() {
           {/* Left Column - Text Content */}
           <div className="space-y-6">
             <h2 className="text-4xl lg:text-[48px] font-semibold leading-15 text-brand-navy max-w-xl">
-              Let's talk about how digital initiatives can transform your business
+              Let&apos;s talk about how digital initiatives can transform your business
             </h2>
             <p className="text-base md:text-lg font-normal leading-8 text-brand-navy max-w-lg">
-              We'll happily assist in exploring what will work best for you. Like, really best.
+              We&apos;ll happily assist in exploring what will work best for you. Like, really best.
             </p>
           </div>
 
@@ -79,61 +77,61 @@ export default function ContactSection() {
                 <CheckCircle2 className="h-4 w-4" />
                 <AlertTitle>Success!</AlertTitle>
                 <AlertDescription>
-                  Your message has been submitted successfully. We'll get back to you soon!
+                  Your message has been submitted successfully. We&apos;ll get back to you soon!
                 </AlertDescription>
               </Alert>
             )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Input */}
-              <div className="relative">
+              <div>
+                <label htmlFor="contact-email" className="sr-only">
+                  Email
+                </label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className={inputBaseClasses}
+                  className={inputClasses}
                 />
-                <label 
-                  className={`${labelBaseClasses} ${formData.email ? labelFilledClasses : ''}`}
-                >
-                  Email
-                </label>
               </div>
 
               {/* Name Input */}
-              <div className="relative">
+              <div>
+                <label htmlFor="contact-name" className="sr-only">
+                  Name
+                </label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
+                  placeholder="Name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className={inputBaseClasses}
+                  className={inputClasses}
                 />
-                <label 
-                  className={`${labelBaseClasses} ${formData.name ? labelFilledClasses : ''}`}
-                >
-                  Name
-                </label>
               </div>
 
               {/* Message Textarea */}
-              <div className="relative">
+              <div>
+                <label htmlFor="contact-message" className="sr-only">
+                  Message
+                </label>
                 <textarea
+                  id="contact-message"
                   name="message"
+                  placeholder="Message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className={`${inputBaseClasses} resize-none`}
+                  className={`${inputClasses} resize-none`}
                 />
-                <label 
-                  className={`${labelBaseClasses} ${formData.message ? labelFilledClasses : ''}`}
-                >
-                  Message
-                </label>
               </div>
 
               {/* Submit Button */}

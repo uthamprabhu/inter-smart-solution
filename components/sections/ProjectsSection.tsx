@@ -22,20 +22,20 @@ export default function ProjectsSection() {
           {/* Left Image - Project 01 */}
           <Image
             src="/images/projects/project-01.png"
-            alt="AI Project 1"
+            alt="AI Project showcasing machine learning implementation"
             width={700}
             height={500}
-            className="w-full md:w-[500px] lg:w-[750px] h-auto"
+            className="w-full md:w-125 lg:w-187.5 h-auto"
             priority
           />
 
           {/* Right Image - Project 02 */}
           <Image
             src="/images/projects/project-02.png"
-            alt="AI Project 2"
+            alt="AI Project demonstrating natural language processing"
             width={500}
             height={400}
-            className="w-full md:w-[380px] lg:w-[550px] h-auto"
+            className="w-full md:w-95 lg:w-137.5 h-auto"
           />
         </div>
       </div>

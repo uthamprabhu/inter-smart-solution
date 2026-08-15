@@ -39,22 +39,22 @@ export const footerSections: FooterSection[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: 'Facebook',
-    href: 'https://facebook.com',
+    href: 'https://www.facebook.com/intersmart',
     icon: '/icons/social/facebook.svg',
   },
   {
     name: 'Instagram',
-    href: 'https://instagram.com',
+    href: 'https://www.instagram.com/intersmartsolution/',
     icon: '/icons/social/instagram.svg',
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/company/inter-smart-solution',
     icon: '/icons/social/linkedin.svg',
   },
   {
     name: 'Twitter',
-    href: 'https://twitter.com',
+    href: 'https://twitter.com/Intersmarts',
     icon: '/icons/social/twitter.svg',
   },
 ];

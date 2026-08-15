@@ -27,14 +27,14 @@ export default function ProcessSection() {
     }
     
     if (activeStep < WINDOW_SIZE) {
-      // Show first window
+      // Show first window (always 4 items)
       return processSteps.slice(0, WINDOW_SIZE).map((step, idx) => ({ 
         ...step, 
         originalIndex: idx 
       }));
     }
     
-    // Show remaining steps
+    // Show remaining steps (3 items for 7 total)
     return processSteps.slice(WINDOW_SIZE).map((step, idx) => ({ 
       ...step, 
       originalIndex: idx + WINDOW_SIZE 
@@ -42,7 +42,6 @@ export default function ProcessSection() {
   };
 
   const visibleSteps = getVisibleSteps();
-  const visibleCount = visibleSteps.length;
   const isInFirstWindow = activeStep < WINDOW_SIZE;
 
   // Calculate progress line width based on position within visible window
@@ -71,9 +70,8 @@ export default function ProcessSection() {
     setActiveStep((prev) => (prev < totalSteps - 1 ? prev + 1 : 0));
   };
 
-  const gridColsClass = visibleCount === WINDOW_SIZE 
-    ? 'grid-cols-2 sm:grid-cols-4' 
-    : `grid-cols-2 sm:grid-cols-${Math.min(visibleCount, 3)}`;
+  // Always use 4 columns on desktop to prevent wrapping
+  const gridColsClass = 'grid-cols-2 sm:grid-cols-4';
   const stepTitleClasses = "text-xs sm:text-sm md:text-base lg:text-[20px] font-medium leading-tight sm:leading-normal lg:leading-8 line-clamp-2";
 
   return (
@@ -87,7 +85,7 @@ export default function ProcessSection() {
       <div className="container-responsive">
         {/* Navigation Controls */}
         <div className="flex justify-end items-center gap-4 mb-8">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <button
               onClick={handlePrevious}
               className="w-8 h-8 lg:w-11.75 lg:h-11.75 flex items-center justify-center hover:opacity-80 transition-opacity duration-300"
@@ -95,7 +93,7 @@ export default function ProcessSection() {
             >
               <Image
                 src="/icons/arrows/arrow-left.svg"
-                alt="Previous"
+                alt=""
                 width={47}
                 height={47}
                 className="w-full h-full"
@@ -113,7 +111,7 @@ export default function ProcessSection() {
             >
               <Image
                 src="/icons/arrows/arrow-right.svg"
-                alt="Next"
+                alt=""
                 width={47}
                 height={47}
                 className="w-full h-full"
